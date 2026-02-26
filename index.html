@@ -25,6 +25,14 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .video-link-btn {
+            background: linear-gradient(90deg, #ff0000 0%, #cc0000 100%);
+            transition: all 0.3s ease;
+        }
+        .video-link-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -35,7 +43,14 @@
         <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
             <i class="fas fa-heart text-red-500 mr-2"></i>2025 志工週
         </h1>
-        <p class="text-xl text-gray-600 font-medium">舊愛新歡市集：登記資料查詢</p>
+        <p class="text-xl text-gray-600 font-medium mb-6">舊愛新歡市集：登記資料查詢</p>
+        
+        <!-- 新加入的 YouTube 連結 -->
+        <a href="https://youtu.be/b4SRZurGg1c?si=hCT4PAkEn7EhBTCf" target="_blank" 
+           class="video-link-btn inline-flex items-center px-6 py-3 text-white font-bold rounded-full shadow-lg">
+            <i class="fab fa-youtube text-2xl mr-2"></i>
+            新歡回饋
+        </a>
     </div>
 
     <!-- Search Section -->
@@ -54,6 +69,8 @@
                 立即查詢
             </button>
         </div>
+        <!-- 錯誤提示區域 (取代 alert) -->
+        <p id="errorTip" class="text-red-500 text-sm mt-2 hidden">請輸入有效的編號</p>
     </div>
 
     <!-- Results Display -->
@@ -117,7 +134,7 @@
 </div>
 
 <script>
-    // 嵌入的 JSON 資料 (這部分是根據您的 CSV 轉換而來的)
+    // 資料庫內容 (保留您提供的原始內容)
     const marketplaceData = [
     {
         "編號":1.0,
@@ -384,17 +401,6 @@
         "捐物位置":"八德"
     },
     {
-        "編號":25.0,
-        "姓名【Outlook全名】":null,
-        "舊愛類別":null,
-        "舊愛":null,
-        "數量":null,
-        "舊愛功能說明":null,
-        "舊愛售價【請以百元倍數定價】":null,
-        "舊愛小故事":null,
-        "捐物位置":null
-    },
-    {
         "編號":26.0,
         "姓名【Outlook全名】":"Sheila CY Lin (林嘉洋)",
         "舊愛類別":"生活家電",
@@ -426,17 +432,6 @@
         "舊愛售價【請以百元倍數定價】":"NT$500",
         "舊愛小故事":"短期租屋使用，現已買房 ｡:.ﾟヽ(*´∀`)ﾉﾟ.:｡",
         "捐物位置":"宏匯"
-    },
-    {
-        "編號":29.0,
-        "姓名【Outlook全名】":null,
-        "舊愛類別":null,
-        "舊愛":null,
-        "數量":null,
-        "舊愛功能說明":null,
-        "舊愛售價【請以百元倍數定價】":null,
-        "舊愛小故事":null,
-        "捐物位置":null
     },
     {
         "編號":30.0,
@@ -1038,9 +1033,9 @@
         "舊愛類別":"生活用品",
         "舊愛":"貓福珊迪 伴讀玩偶",
         "數量":1.0,
-        "舊愛功能說明":"全新日本來的  陪伴辦公或讀書 大人小孩都適宜",
+        "舊愛功能說明":"全新日本來的  陪伴辦公或讀書 大人小孩都適宜",
         "舊愛售價【請以百元倍數定價】":"NT$600",
-        "舊愛小故事":"坐在位子的時間太少了  又不能帶著進出會議室  因此讓給需要的夥伴",
+        "舊愛小故事":"坐在位子的時間太少了  又不能帶著進出會議室  因此讓給需要的夥伴",
         "捐物位置":"八德"
     },
     {
@@ -1049,7 +1044,7 @@
         "舊愛類別":"公仔玩偶",
         "舊愛":"橘貓小公仔(三個一組)",
         "數量":1.0,
-        "舊愛功能說明":"全新  可愛 可以放在桌上 陪伴你的可愛玩偶",
+        "舊愛功能說明":"全新  可愛 可以放在桌上 陪伴你的可愛玩偶",
         "舊愛售價【請以百元倍數定價】":"NT$100",
         "舊愛小故事":"人老 重複買了 ",
         "捐物位置":"八德"
@@ -1502,7 +1497,7 @@
         "數量":1.0,
         "舊愛功能說明":"全新吊牌未拆",
         "舊愛售價【請以百元倍數定價】":"NT$800",
-        "舊愛小故事":"金屬提把, 真皮包身, 無法駕馭",
+        "舊愛小故事":"金屬提把, 真皮包身, 無法駕駕",
         "捐物位置":"iTower"
     },
     {
@@ -1834,17 +1829,6 @@
         "舊愛售價【請以百元倍數定價】":"NT$300",
         "舊愛小故事":"咩~ ",
         "捐物位置":"iTower"
-    },
-    {
-        "編號":157.0,
-        "姓名【Outlook全名】":null,
-        "舊愛類別":null,
-        "舊愛":null,
-        "數量":null,
-        "舊愛功能說明":null,
-        "舊愛售價【請以百元倍數定價】":null,
-        "舊愛小故事":null,
-        "捐物位置":null
     },
     {
         "編號":158.0,
@@ -2534,7 +2518,7 @@
         "舊愛類別":"生活用品",
         "舊愛":"Snoopy 304不鏽鋼保冷吸管杯(500ml)",
         "數量":1.0,
-        "舊愛功能說明":"全新<只為了收集五款，此經典款)  盲盒未拆封",
+        "舊愛功能說明":"全新<只為了收集五款，此經典款)  盲盒未拆封",
         "舊愛售價【請以百元倍數定價】":"NT$200",
         "舊愛小故事":"Snoopy控，收集太多分享 ",
         "捐物位置":"八德"
@@ -2547,7 +2531,7 @@
         "數量":1.0,
         "舊愛功能說明":"全新 (未拆封)",
         "舊愛售價【請以百元倍數定價】":"NT$100",
-        "舊愛小故事":"口愛  遺忘在角落",
+        "舊愛小故事":"口愛  遺忘在角落",
         "捐物位置":"八德"
     },
     {
@@ -2569,7 +2553,7 @@
         "數量":1.0,
         "舊愛功能說明":"全新 (未拆封)",
         "舊愛售價【請以百元倍數定價】":"NT$100",
-        "舊愛小故事":"想當年 Kitty Fan        ",
+        "舊愛小故事":"想當年 Kitty Fan        ",
         "捐物位置":"八德"
     },
     {
@@ -2635,7 +2619,7 @@
         "數量":1.0,
         "舊愛功能說明":"8成新 有使用痕跡 功能正常",
         "舊愛售價【請以百元倍數定價】":"NT$400",
-        "舊愛小故事":"很愛嘗鮮各種廚房家電  這個很少使用 可以弄一人份湯品 適合單身族群使用",
+        "舊愛小故事":"很愛嘗鮮各種廚房家電  這個很少使用 可以弄一人份湯品 適合單身族群使用",
         "捐物位置":"悅Tower"
     },
     {
@@ -3140,7 +3124,7 @@
         "舊愛":"向日葵茶具點心盤組",
         "數量":1.0,
         "舊愛功能說明":"(應該)有用過，親友送的",
-        "舊愛售價【請以百元倍數定價】":"NT$300",
+        "舊愛售價【請以進百元倍數定價】":"NT$300",
         "舊愛小故事":null,
         "捐物位置":"宏匯"
     },
@@ -3643,7 +3627,7 @@
         "編號":325.0,
         "姓名【Outlook全名】":"Bart Chen(陳宗智)",
         "舊愛類別":"服飾鞋包",
-        "舊愛":"Levis  LVC 短褲 47501-0049 W32 (建議W30著用)",
+        "舊愛":"Levis  LVC 短褲 47501-0049 W32 (建議W30著用)",
         "數量":1.0,
         "舊愛功能說明":"全新",
         "舊愛售價【請以百元倍數定價】":"NT$1,000",
@@ -3705,23 +3689,27 @@
         "舊愛小故事":null,
         "捐物位置":null
     }
-]
+];
 
     function performSearch() {
         const input = document.getElementById('searchInput');
         const id = parseInt(input.value);
         const resultContainer = document.getElementById('resultContainer');
         const emptyMessage = document.getElementById('emptyMessage');
+        const errorTip = document.getElementById('errorTip');
+
+        // 隱藏之前的狀態
+        errorTip.classList.add('hidden');
 
         if (!id) {
-            alert("請輸入要查詢的編號");
+            errorTip.classList.remove('hidden');
             return;
         }
 
         const data = marketplaceData.find(item => item["編號"] === id);
 
         if (data) {
-            // Fill data
+            // 填充資料
             document.getElementById('displayId').innerText = `編號 #${data["編號"]}`;
             document.getElementById('resName').innerText = data["姓名【Outlook全名】"] || '無資料';
             document.getElementById('resCategory').innerText = data["舊愛類別"] || '無資料';
@@ -3732,16 +3720,19 @@
             document.getElementById('resStory').innerText = data["舊愛小故事"] || '這件物品正等待新的故事...';
             document.getElementById('resLocation').innerText = data["捐物位置"] || '未註明';
 
-            // Toggle visibility
+            // 切換顯示
             resultContainer.classList.remove('hidden');
             emptyMessage.classList.add('hidden');
+            
+            // 捲動到結果區域
+            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         } else {
             resultContainer.classList.add('hidden');
             emptyMessage.classList.remove('hidden');
         }
     }
 
-    // Support Enter Key
+    // 支援 Enter 鍵
     document.getElementById('searchInput').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
             performSearch();
