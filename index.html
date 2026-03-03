@@ -386,10 +386,10 @@
 
         if (data) {
             document.getElementById('displayId').innerText = `編號 #${data["編號"]}`;
-            document.getElementById('resName').innerText = data["姓名【Outlook全名】"] || '無資料';
+            document.getElementById('resName').innerText = data["舊愛主人"] || '無資料';
             document.getElementById('resCategory').innerText = data["舊愛類別"] || '無資料';
             document.getElementById('resItem').innerText = data["舊愛"] || '無資料';
-            document.getElementById('resPrice').innerText = data["舊愛售價【請以百元倍數定價】"] || '無報價';
+            document.getElementById('resPrice').innerText = data["舊愛售價"] || '無報價';
             document.getElementById('resDesc').innerText = data["舊愛功能說明"] || '尚無詳細說明';
             document.getElementById('resStory').innerText = data["舊愛小故事"] || '這件物品正等待新的故事...';
             document.getElementById('resLocation').innerText = data["捐物位置"] || '未註明';
